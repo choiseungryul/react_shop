@@ -7,10 +7,9 @@ function Card({data}){
     <div className="col-md-4" onClick={() => {
       navigate('/detail/' + data.id)
     }}>
-      <img src={`${import.meta.env.BASE_URL}image/${data.title}.jpg`} alt="" width='100%' />
+      <img src={`https://raw.githubusercontent.com/ghkdss/react_sample_data/main/img/${data.title}.jpg`} alt="" width='100%' />
       <h4>{data.title}</h4>
       <p>{data.content}</p>
-      <span>👍{data.like}</span>
       </div>
   )
 }
