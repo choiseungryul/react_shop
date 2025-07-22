@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import TabContent from "../components/TabContent";
+import { useDispatch } from "react-redux";
+import { addItem } from "../redux/cartSlice";
 
 function Detail ({fruit}) {
   const {id} = useParams();
@@ -9,6 +11,7 @@ function Detail ({fruit}) {
   const [num2, setNum2] = useState(0);
   const [alert, setAlert] = useState(true);
   const [tabNumber, setTabNumber] = useState(0);
+  const dispatch = useDispatch();
 
   const selectedFruit = fruit[id];
   // useEffect는 html이 전부 다 렌더링이 완료된 후 실행이 된다.
@@ -34,7 +37,7 @@ function Detail ({fruit}) {
    
 
   if( !selectedFruit ) {
-    alert('해당 상품이 없습니다.')
+    window.alert('해당 상품이 없습니다.')
     return <div>해당 상품이 없습니다.</div>
   }
 
@@ -65,7 +68,15 @@ function Detail ({fruit}) {
           <h4>{fruit[id].title}</h4>
           <p>{fruit[id].content}</p>
           <p>{fruit[id].price}</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button className="btn btn-danger" onClick={() => {
+            const item = {
+              id: id,
+              title: fruit[id].title,
+              count: 1
+            }
+            dispatch(addItem(item));
+            window.alert('장바구니 추가 완료')
+          }}>주문하기</button>
         </div>
       </div>
       <Nav className="mt-5" variant="tabs" justify defaultActiveKey="link-0">
