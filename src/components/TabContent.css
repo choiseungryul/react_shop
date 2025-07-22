@@ -1,0 +1,8 @@
+.start {
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+.start.end {
+  opacity: 1;
+}
